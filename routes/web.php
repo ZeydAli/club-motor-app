@@ -15,9 +15,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [IndexController::class, 'home']);
-Route::get('/profile', [IndexController::class, 'profile']);
-Route::get('/visidanmisi', [IndexController::class, 'visiDanMisi']);
-Route::get('/produkkami', [IndexController::class, 'produkKami']);
-Route::get('/kontakkami', [IndexController::class, 'kontakKami']);
-Route::get('/aboutus', [IndexController::class, 'aboutUs']);
+Route::get('/', [IndexController::class, 'beranda']);
+Route::get('/profil', [IndexController::class, 'profil']);
+Route::get('/galeri', [IndexController::class, 'galeri']);

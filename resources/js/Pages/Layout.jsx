@@ -1,13 +1,16 @@
 import React from "react";
 import Nav from "../Shared/Nav";
+import Footer from "../Shared/Footer";
 
 export default function Layout({ children }) {
   return (
     <>
-      <div className="font-inter min-h-screen min-w-full">
+      <div className="font-inter min-h-screen min-w-full flex flex-col justify-between">
         <Nav />
 
-        <div className="py-16">{children}</div>
+        <div>{children}</div>
+
+        <Footer />
       </div>
     </>
   );

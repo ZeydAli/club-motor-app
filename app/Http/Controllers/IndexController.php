@@ -7,33 +7,18 @@ use Inertia\Inertia;
 
 class IndexController extends Controller
 {
-    public function home()
+    public function beranda()
     {
-        return Inertia::render('Home');
+        return Inertia::render('Beranda');
     }
 
-    public function profile()
+    public function profil()
     {
-        return Inertia::render('Profile');
+        return Inertia::render('Profil');
     }
 
-    public function visiDanMisi()
+    public function galeri()
     {
-        return Inertia::render('VisiDanMisi');
-    }
-
-    public function produkKami()
-    {
-        return Inertia::render('ProdukKami');
-    }
-
-    public function kontakKami()
-    {
-        return Inertia::render('KontakKami');
-    }
-
-    public function aboutUs()
-    {
-        return Inertia::render('AboutUs');
+        return Inertia::render('Gallery');
     }
 }
