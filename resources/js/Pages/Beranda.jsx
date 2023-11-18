@@ -2,13 +2,7 @@ import React from "react";
 import Layout from "./Layout";
 import imgSrc from "../../../public/images/motobike1.jpg";
 import imgSrc2 from "../../../public/images/motobike2.jpg";
-import galleryImgSrc from "../../../public/images/galeri1.jpg";
-import galleryImgSrc2 from "../../../public/images/galeri2.jpg";
-import galleryImgSrc3 from "../../../public/images/galeri3.jpg";
-import galleryImgSrc4 from "../../../public/images/galeri4.jpg";
-import galleryImgSrc5 from "../../../public/images/galeri5.jpg";
 import eventImgSrc1 from "../../../public/images/event1.jpg";
-import eventImgSrc2 from "../../../public/images/event2.jpg";
 import produkImgSrc1 from "../../../public/images/produk1.png";
 import produkImgSrc2 from "../../../public/images/produk2.png";
 import produkImgSrc3 from "../../../public/images/produk3.png";
@@ -23,53 +17,13 @@ import logoImgSrc5 from "../../../public/images/logo5.png";
 import logoImgSrc6 from "../../../public/images/logo6.png";
 import { Link } from "@inertiajs/react";
 
-export default function Beranda() {
+export default function Beranda({ galleries, events }) {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  const galleries = [
-    {
-      id: 1,
-      imageSrc: galleryImgSrc,
-    },
-    {
-      id: 2,
-      imageSrc: galleryImgSrc2,
-    },
-    {
-      id: 3,
-      imageSrc: galleryImgSrc3,
-    },
-    {
-      id: 4,
-      imageSrc: galleryImgSrc4,
-    },
-    {
-      id: 5,
-      imageSrc: galleryImgSrc5,
-    },
-  ];
-
-  const events = [
-    {
-      id: 1,
-      name: "Seminar Safety Riding",
-      imageSrc: eventImgSrc1,
-      description:
-        "Dalam acara ini, kami menghadirkan para ahli dan praktisi berpengalaman untuk membahas praktik berkendara yang aman dan bertanggung jawab. Peserta seminar mendapatkan wawasan mendalam tentang pentingnya perawatan motor, teknik berkendara yang aman, serta langkah-langkah untuk mengurangi risiko kecelakaan di jalan raya. Dengan fokus pada keselamatan, seminar ini menjadi tempat bagi para pengendara untuk memperoleh pengetahuan praktis yang dapat diterapkan dalam pengalaman berkendara sehari-hari.",
-    },
-    {
-      id: 2,
-      name: "Charity Ride",
-      imageSrc: eventImgSrc2,
-      description:
-        "Charity Ride dari Iron Horse adalah perjalanan amal yang memberikan bantuan kepada mereka yang membutuhkan. Kami berkendara untuk mengumpulkan dana atau barang untuk membantu anak-anak, lingkungan, atau program kesehatan. Ini adalah kesempatan untuk bersenang-senang sambil memberikan dampak positif kepada komunitas.",
-    },
-  ];
 
   const products = [
     {
@@ -171,8 +125,8 @@ export default function Beranda() {
             {galleries.map((gallery) => (
               <div key={gallery.id} className="min-w-max">
                 <img
-                  src={gallery.imageSrc}
-                  className="h-52 2xl:h-72 object-cover"
+                  src={`/storage/${gallery.image}`}
+                  className="h-52 2xl:h-72 object-cover hover:scale-125 transition-all duration-200 ease-in"
                 />
               </div>
             ))}
@@ -193,11 +147,19 @@ export default function Beranda() {
                 className="relative h-60 rounded overflow-hidden group"
                 key={event.id}
               >
-                <img
-                  className="w-full object-cover object-center"
-                  src={event.imageSrc}
-                  alt="Card"
-                />
+                {event.image ? (
+                  <img
+                    className="w-full object-cover object-center"
+                    src={`/storage/${event.image.image}`}
+                    alt="Card"
+                  />
+                ) : (
+                  <img
+                    className="w-full object-cover object-center"
+                    src={eventImgSrc1}
+                    alt="Card"
+                  />
+                )}
                 <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-center bg-black/30 group-hover:hidden">
                   <div className="p-4">
                     <h2 className="text-2xl font-bold mb-2">{event.name}</h2>

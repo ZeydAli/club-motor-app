@@ -1,11 +1,13 @@
-import { Link, usePage } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import React, { useState } from "react";
 import logoImgSrc from "../../../public/images/iron-horse-logo.png";
 import { IoIosMenu } from "react-icons/io";
 import { HiMiniXMark } from "react-icons/hi2";
 
 export default function Nav() {
-  const { url } = usePage();
+  const { url, props } = usePage();
+  const { post } = useForm();
+  const isAuthenticated = props.auth && props.auth.user;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -13,6 +15,11 @@ export default function Nav() {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setOpen(!open);
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    post("/logout");
   };
 
   const iconStyles = {
@@ -130,17 +137,53 @@ export default function Nav() {
               Kontak
             </a>
           </li>
+          <div className="absolute right-10">
+            {isAuthenticated ? (
+              <form onSubmit={handleLogout}>
+                <button
+                  type="submit"
+                  className=" bg-white/20 py-1 px-2 text-sm rounded-md border border-white/25"
+                >
+                  logout
+                </button>
+              </form>
+            ) : (
+              <Link href="/login">
+                <button className=" bg-white/20 py-1 px-2 text-sm rounded-md border border-white/25">
+                  login
+                </button>
+              </Link>
+            )}
+          </div>
         </ul>
         <div className="flex md:hidden justify-between items-center px-10 text-white">
           <div>
             <img src={logoImgSrc} className="w-24" />
           </div>
-          <div className="cursor-pointer" onClick={() => setOpen(!open)}>
-            {open ? (
-              <HiMiniXMark style={iconStyles} />
+          <div className="flex gap-x-4">
+            {isAuthenticated ? (
+              <form onSubmit={handleLogout}>
+                <button
+                  type="submit"
+                  className=" bg-white/20 py-1 px-2 text-sm rounded-md border border-white/25"
+                >
+                  logout
+                </button>
+              </form>
             ) : (
-              <IoIosMenu style={iconStyles} />
+              <Link href="/login">
+                <button className=" bg-white/20 py-1 px-2 text-sm rounded-md border border-white/25">
+                  login
+                </button>
+              </Link>
             )}
+            <div className="cursor-pointer" onClick={() => setOpen(!open)}>
+              {open ? (
+                <HiMiniXMark style={iconStyles} />
+              ) : (
+                <IoIosMenu style={iconStyles} />
+              )}
+            </div>
           </div>
         </div>
         <div className="fixed z-40 bg-zinc-950 min-w-full mt-4">
